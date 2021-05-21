@@ -20,15 +20,11 @@ public  class ManageStudent {
                 System.out.println(key + " - " + studentMap.get(key));
             }
     }
-//    Student findByName(String name){
-//        Set<String> keySet=studentMap.keySet();
-//        for (String key : keySet) {
-//            if(studentMap.get(key).getName().equals(name)){
-//                return studentMap.get(key);
-//            }
-//        }
-//                return null;
-//    }
+
+    void deleteleById(String id){
+        studentMap.remove(id);
+    }
+
     Student findById(String id){
         Set<String> keySet=studentMap.keySet();
         for(String key:keySet){
@@ -38,31 +34,37 @@ public  class ManageStudent {
         }
         return null;
     }
-    void deleteleById(String id){
-        studentMap.remove(id);
-    }
-    void sort(){
-        ArrayList<Student> listStudent=new ArrayList<>(studentMap.values());
-        Collections.sort(listStudent, new Comparator<Student>() {
-            @Override
-            public int compare(Student o1, Student o2) {
-                return o1.getName().compareTo(o2.getName());
+    void sortById(){
+        Set<Map.Entry<String,Student>>entries=studentMap.entrySet();
+        List<Map.Entry<String,Student>>entryList=new ArrayList<>(entries);
+            Collections.sort(entryList, new Comparator<Map.Entry<String, Student>>() {
+                @Override
+                public int compare(Map.Entry<String, Student> o1, Map.Entry<String, Student> o2) {
+                    return o1.getValue().getId().compareTo(o2.getValue().getId());
+                }
+            });
+            LinkedHashMap<String,Student>sortStudentMap=new LinkedHashMap<>(entryList.size());
+            for (Map.Entry<String,Student> entry:entryList){
+                sortStudentMap.put(entry.getKey(),entry.getValue());
             }
-        });
-            studentMap=new HashMap<>();
-        for (int i = 0; i < listStudent.size() ; i++) {
-            studentMap.put(listStudent.get(i).getId(),listStudent.get(i));
-        }
+            studentMap=sortStudentMap;
     }
-//    void deleteByName(String name){
-//        studentMap.remove(findByName(name).getId());
-//    }
-//    void editStudent(String id){
-//
+
+//    void sort(){
+//        ArrayList<Student> listStudent=new ArrayList<>(studentMap.values());
+//        Collections.sort(listStudent, new Comparator<Student>() {
+//            @Override
+//            public int compare(Student o1, Student o2) {
+//                return o1.getName().compareTo(o2.getName());
+//            }
+//        });
+//            studentMap=new HashMap<>();
+//        for (int i = 0; i < listStudent.size() ; i++) {
+//            studentMap.put(listStudent.get(i).getId(),listStudent.get(i));
+//        }
 //    }
 
      Student creatStudent() {
-        Scanner scanner = new Scanner(System.in);
         Student student = new Student();
         System.out.println("Nhập tên sinh viên: ");
         student.setName(scanner.nextLine());
@@ -77,7 +79,6 @@ public  class ManageStudent {
     }
     String enterGender() {
         String gender;
-        Scanner scanner=new Scanner(System.in);
         while (true){
             int scanGender= scanner.nextInt();
             if(scanGender==1){
@@ -92,11 +93,8 @@ public  class ManageStudent {
         return gender;
     }
         Student update() {
-            Scanner scanner = new Scanner(System.in);
             System.out.println("Nhập id:");
             String id=scanner.nextLine();
-//            Set<String> keySet = studentMap.keySet();
-//            for (String key : keySet) {
                 if (findById(id)!=null) {
                     System.out.println("Nhập tên:");
                     findById(id).setName(scanner.nextLine());
@@ -114,7 +112,6 @@ public  class ManageStudent {
 
 
     void start(){
-        Scanner scanner=new Scanner(System.in);
         int choice;
         do{
                 menu();
@@ -138,7 +135,7 @@ public  class ManageStudent {
                     findById(scanner.nextLine());
                     break;
                 case 5:
-                    sort();
+                    sortById();
                     break;
                 case 6:
                     display();
