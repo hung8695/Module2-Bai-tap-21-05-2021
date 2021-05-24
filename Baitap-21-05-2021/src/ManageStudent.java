@@ -21,7 +21,13 @@ public  class ManageStudent {
             }
     }
 
-    void deleteleById(String id){
+    void deleteleById(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Nhập Id cần xóa!");
+        String id =scanner.nextLine();
+        if(findById(id)==null){
+            System.out.println("Mã lày ko có");
+        } else
         studentMap.remove(id);
     }
 
@@ -127,8 +133,7 @@ public  class ManageStudent {
                     }else  update();
                     break;
                 case 3:
-                    System.out.println("Nhập id cần xóa");
-                    deleteleById(scanner.nextLine());
+                    deleteleById();
                     break;
                 case 4:
                     System.out.println("Nhâp id cần tìm kiếm: ");
