@@ -56,23 +56,12 @@ public  class ManageStudent {
             studentMap=sortStudentMap;
     }
 
-//    void sort(){
-//        ArrayList<Student> listStudent=new ArrayList<>(studentMap.values());
-//        Collections.sort(listStudent, new Comparator<Student>() {
-//            @Override
-//            public int compare(Student o1, Student o2) {
-//                return o1.getName().compareTo(o2.getName());
-//            }
-//        });
-//            studentMap=new HashMap<>();
-//        for (int i = 0; i < listStudent.size() ; i++) {
-//            studentMap.put(listStudent.get(i).getId(),listStudent.get(i));
-//        }
-//    }
+
 
      Student creatStudent() {
         Student student = new Student();
         System.out.println("Nhập tên sinh viên: ");
+        scanner.nextLine();
         student.setName(scanner.nextLine());
         System.out.println("Nhập tuổi sinh viên: ");
         student.setAge(scanner.nextInt());
@@ -99,6 +88,7 @@ public  class ManageStudent {
         return gender;
     }
         Student update() {
+        Scanner scanner=new Scanner(System.in);
             System.out.println("Nhập id:");
             String id=scanner.nextLine();
                 if (findById(id)!=null) {
@@ -129,8 +119,8 @@ public  class ManageStudent {
                     break;
                 case 2:
                     if(update()==null){
-                        System.out.println("Không tìm thấy thanh niên");
-                    }else  update();
+                        System.out.println("Nothing!");
+                    }
                     break;
                 case 3:
                     deleteleById();
@@ -148,7 +138,7 @@ public  class ManageStudent {
                 case 0:
                     System.exit(0);
             }
-        } while (choice<=16&&choice>=0);
+        } while (choice<=6&&choice>=0);
     }
     void menu(){
         System.out.println("QUẢN LÝ SINH VIÊN");
