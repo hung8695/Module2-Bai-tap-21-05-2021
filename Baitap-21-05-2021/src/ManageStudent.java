@@ -12,7 +12,10 @@ public  class ManageStudent {
     public void addStudent(Student student){
         studentMap.put(student.getId(),student);
     }
+    void  addStudent(){
+        studentMap.put(creatStudent().getId(),creatStudent());
 
+    }
 
      void display() {
          Set<String> keySet=studentMap.keySet();
@@ -57,21 +60,6 @@ public  class ManageStudent {
     }
 
 
-
-     Student creatStudent() {
-        Student student = new Student();
-        System.out.println("Nhập tên sinh viên: ");
-        scanner.nextLine();
-        student.setName(scanner.nextLine());
-        System.out.println("Nhập tuổi sinh viên: ");
-        student.setAge(scanner.nextInt());
-        scanner.nextLine();
-        System.out.println("Nhập giới tính sinh viên(Nam: bấm 1; Nữ bấm 2) : ");
-        student.setGender(enterGender());
-        System.out.println("Nhập địa chỉ: ");
-        student.setAddress(scanner.nextLine());
-        return student;
-    }
     String enterGender() {
         String gender;
         while (true){
@@ -87,6 +75,22 @@ public  class ManageStudent {
         }
         return gender;
     }
+     Student creatStudent() {
+        Student student = new Student();
+        System.out.println("Nhập tên sinh viên: ");
+        scanner.nextLine();
+        student.setName(scanner.nextLine());
+        System.out.println("Nhập tuổi sinh viên: ");
+        student.setAge(scanner.nextInt());
+        scanner.nextLine();
+        System.out.println("Nhập giới tính sinh viên(Nam: bấm 1; Nữ bấm 2) : ");
+        student.setGender(enterGender());
+        scanner.nextLine();
+        System.out.println("Nhập địa chỉ: ");
+        student.setAddress(scanner.nextLine());
+        return student;
+    }
+
         Student update() {
         Scanner scanner=new Scanner(System.in);
             System.out.println("Nhập id:");
